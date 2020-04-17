@@ -36,12 +36,15 @@ before_script:
   - generate_version ${TRAVIS_BUILD_DIR}/Marlin/	
   - cat ${TRAVIS_BUILD_DIR}/Marlin/Version.h	
   #	
-  - run_tests ${TRAVIS_BUILD_DIR} ${TEST_PLATFORM}
+#  - run_tests ${TRAVIS_BUILD_DIR} ${TEST_PLATFORM}
 
 script:	
   - mkdir _builds
   - pio run
   - cp .pio/build/megaatmega2560/firmware.hex _builds/some-build.hex
+
+before_deploy:
+  - if [ -z "$TRAVIS_TAG" ] ; then export TRAVIS_TAG=develop ; fi
 
 deploy:
   provider: releases
