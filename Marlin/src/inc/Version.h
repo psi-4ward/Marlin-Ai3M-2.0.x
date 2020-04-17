@@ -32,7 +32,7 @@
    * Verbose version identifier which should contain a reference to the location
    * from where the binary was downloaded or the source code was compiled.
    */
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (davidramiro, Github)"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (davidramiro, Github piezo anpassungen durch Christian Hirtreiter)"
 
 /**
  * Defines the version of the Marlin-AI3M build. Not to be confused with

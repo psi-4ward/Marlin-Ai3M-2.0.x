@@ -11,44 +11,6 @@ notifications:
 env:	
   - TEST_PLATFORM="megaatmega2560"	
 
-  # Extended AVR Environments	
-  #- TEST_PLATFORM="FYSETC_F6_13"	
-  #- TEST_PLATFORM="megaatmega1280"	
-  #- TEST_PLATFORM="rambo"	
-  #- TEST_PLATFORM="sanguino_atmega1284p"	
-  #- TEST_PLATFORM="sanguino_atmega644p"	
-
-  # Extended STM32 Environments	
-  #- TEST_PLATFORM="STM32F103RC_bigtree"	
-  #- TEST_PLATFORM="STM32F103RC_bigtree_USB"	
-  #- TEST_PLATFORM="STM32F103RE_bigtree"	
-  #- TEST_PLATFORM="STM32F103RE_bigtree_USB"	
-  #- TEST_PLATFORM="STM32F103RC_fysetc"	
-  #- TEST_PLATFORM="jgaurora_a5s_a1"	
-  #- TEST_PLATFORM="STM32F103VE_longer"	
-  #- TEST_PLATFORM="STM32F407VE_black"	
-  #- TEST_PLATFORM="BIGTREE_SKR_PRO"	
-  #- TEST_PLATFORM="mks_robin"	
-  #- TEST_PLATFORM="ARMED"	
-
-  # STM32 with non-STM framework. both broken for now. they should use HAL_STM32 which is working.	
-  #- TEST_PLATFORM="STM32F4"	
-  #- TEST_PLATFORM="STM32F7"	
-
-  # Put lengthy tests last	
-  #- TEST_PLATFORM="LPC1768"	
-  #- TEST_PLATFORM="LPC1769"	
-
-  # Non-working environment tests	
-  #- TEST_PLATFORM="BIGTREE_BTT002" this board isn't released yet. we need pinout to be sure about what we do	
-  #- TEST_PLATFORM="at90usb1286_cdc"	
-  #- TEST_PLATFORM="at90usb1286_dfu"	
-  #- TEST_PLATFORM="STM32F103CB_malyan"	
-  #- TEST_PLATFORM="mks_robin_lite"	
-  #- TEST_PLATFORM="mks_robin_mini"	
-  #- TEST_PLATFORM="mks_robin_nano"	
-  #- TEST_PLATFORM="SAMD51_grandcentral_m4"	
-
 before_install:	
   #	
   # Fetch the tag information for the current branch	
@@ -74,5 +36,19 @@ before_script:
   - generate_version ${TRAVIS_BUILD_DIR}/Marlin/	
   - cat ${TRAVIS_BUILD_DIR}/Marlin/Version.h	
   #	
-script:	
   - run_tests ${TRAVIS_BUILD_DIR} ${TEST_PLATFORM}
+
+  script:	
+  - mkdir _builds
+  - pio run
+  - cp .pio/build/megaatmega2560/firmware.hex _builds/some-build.hex
+
+deploy:
+  provider: releases
+  token: $GH_TOKEN
+  overwrite: true
+  file_glob: true
+  file: $TRAVIS_BUILD_DIR/_builds/*.hex
+  skip_cleanup: true
+  on:
+    all_branches: true

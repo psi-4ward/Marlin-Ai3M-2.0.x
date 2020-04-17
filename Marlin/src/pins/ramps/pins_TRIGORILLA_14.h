@@ -139,6 +139,43 @@
 #define HEATER_1_PIN       45
 #define HEATER_BED_PIN      8
 
+// TMC2208 UART
+#if HAS_DRIVER(TMC2208)
+ /**
+ * TMC2208 stepper drivers
+ *
+ * Hardware serial communication ports.
+ * If undefined software serial is used according to the
+pins below
+ */
+ #define X_SERIAL_TX_PIN -1
+ #define Y_SERIAL_TX_PIN -1
+ #define Z_SERIAL_TX_PIN -1
+ #define Z2_SERIAL_TX_PIN -1
+ #define E0_SERIAL_TX_PIN -1
+ #define X_SERIAL_RX_PIN -1
+ #define X2_SERIAL_TX_PIN -1
+ #define X2_SERIAL_RX_PIN -1
+
+ #define Y_SERIAL_RX_PIN -1
+ #define Y2_SERIAL_TX_PIN -1
+ #define Y2_SERIAL_RX_PIN -1
+
+ #define Z_SERIAL_RX_PIN -1
+
+ #define Z2_SERIAL_RX_PIN -1
+
+ #define E0_SERIAL_RX_PIN -1
+ #define E1_SERIAL_TX_PIN -1
+ #define E1_SERIAL_RX_PIN -1
+ #define E2_SERIAL_TX_PIN -1
+ #define E2_SERIAL_RX_PIN -1
+ #define E3_SERIAL_TX_PIN -1
+ #define E3_SERIAL_RX_PIN -1
+ #define E4_SERIAL_TX_PIN -1
+ #define E4_SERIAL_RX_PIN -1
+#endif
+
 // Temperatursensoren
 #define TEMP_0_PIN         13
 #define TEMP_1_PIN         15
