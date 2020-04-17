@@ -38,7 +38,7 @@ before_script:
   #	
   - run_tests ${TRAVIS_BUILD_DIR} ${TEST_PLATFORM}
 
-  script:	
+script:	
   - mkdir _builds
   - pio run
   - cp .pio/build/megaatmega2560/firmware.hex _builds/some-build.hex
